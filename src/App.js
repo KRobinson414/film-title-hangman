@@ -6,11 +6,22 @@ import Letters from "./components/Letters";
 import "./App.css";
 
 class App extends Component {
+  state = {
+    selectedCat: null
+  };
+
+  handleCatSelect = event => {
+    const { value } = event.target;
+    this.setState({
+      selectedCat: value
+    });
+  };
+
   render() {
     return (
       <div className="App">
         <h1>Film Title Hangman</h1>
-        <Category />
+        <Category onSelect={this.handleCatSelect} />
         <Image />
         <Word />
         <Letters />
