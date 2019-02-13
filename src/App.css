@@ -1,5 +1,32 @@
 .App {
   text-align: center;
+  display: grid;
+  margin: 0px;
+  width: 100vw;
+  height: 95vh;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 5em 5em 1fr 5em;
+  grid-template-areas: "title title" "category category" "image letters" "word word";
+}
+
+.App h1 {
+  grid-area: title;
+}
+
+.category {
+  grid-area: category;
+}
+
+.image {
+  grid-area: image;
+}
+
+.letters {
+  grid-area: letters;
+}
+
+.word {
+  grid-area: word;
 }
 
 /* @keyframes App-logo-spin {
