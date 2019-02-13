@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import "../css/Letters.css";
+import PropTypes from "prop-types";
 
 export default class Letters extends Component {
   render() {
     return <div className="letters">Letters</div>;
   }
 }
+
+Letters.propTypes = {};
