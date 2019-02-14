@@ -1,17 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import films from "../data/films";
 
 const Category = props => {
-  const makeTally = (acc, element) => {
-    if (acc[element]) acc[element] += 1;
-    if (!acc[element]) acc[element] = 1;
-    return acc;
-  };
-  const categories = Object.keys(
-    films.map(film => film.category).reduce(makeTally, [])
-  );
-  const { onSelect } = props;
+  const { categories, onSelect } = props;
 
   return (
     <div className="category">
@@ -32,6 +23,7 @@ const Category = props => {
 };
 
 Category.propTypes = {
+  categories: PropTypes.array.isRequired,
   onSelect: PropTypes.func.isRequired
 };
 
