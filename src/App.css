@@ -21,6 +21,14 @@
   grid-area: image;
 }
 
+img {
+  grid-area: image;
+  width: 40em;
+  height: auto;
+  overflow: hidden;
+  margin: 0 -100px -50px -100px;
+}
+
 .letters {
   grid-area: letters;
   width: 70%;
@@ -32,19 +40,10 @@
 .word {
   grid-area: letters;
   justify-self: center;
-  margin-top: 2.5em;
+  margin-top: 4em;
 }
 
 .word-char {
   margin: 10px;
   font-size: 30px;
 }
-
-/* @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */

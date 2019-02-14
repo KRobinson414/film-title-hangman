@@ -10,8 +10,9 @@ class App extends Component {
   state = {
     categories: [],
     selectedCat: "",
+    selectedFilm: "",
     guessedLetters: [],
-    selectedFilm: ""
+    wrongGuesses: []
   };
 
   componentDidMount() {
@@ -51,19 +52,32 @@ class App extends Component {
   };
 
   letterSelect = letter => {
-    this.setState(prevState => ({
-      guessedLetters: [...prevState.guessedLetters, letter]
-    }));
+    const { selectedFilm } = this.state;
+    if (!selectedFilm.includes(letter)) {
+      this.setState(prevState => ({
+        guessedLetters: [...prevState.guessedLetters, letter],
+        wrongGuesses: [...prevState.wrongGuesses, letter]
+      }));
+    } else {
+      this.setState(prevState => ({
+        guessedLetters: [...prevState.guessedLetters, letter]
+      }));
+    }
   };
 
   render() {
-    const { categories, selectedFilm, guessedLetters } = this.state;
+    const {
+      categories,
+      selectedFilm,
+      guessedLetters,
+      wrongGuesses
+    } = this.state;
 
     return (
       <div className="App">
         <h1>Film Title Hangman</h1>
         <Category categories={categories} onSelect={this.catSelect} />
-        <Image />
+        <Image wrongGuesses={wrongGuesses} />
         <Word selectedFilm={selectedFilm} guessedLetters={guessedLetters} />
         <Letters letterSelect={this.letterSelect} />
       </div>

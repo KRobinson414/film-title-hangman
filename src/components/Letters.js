@@ -44,7 +44,6 @@ class Letters extends Component {
       "y",
       "z"
     ];
-
     const { clickedLetters } = this.state;
 
     return (

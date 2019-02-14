@@ -7,7 +7,7 @@ export default class Word extends Component {
   render() {
     const { selectedFilm, guessedLetters } = this.props;
     const selectedFilmArr = selectedFilm.split("");
-    console.log(selectedFilmArr);
+
     return (
       <div className="word">
         {selectedFilm &&
