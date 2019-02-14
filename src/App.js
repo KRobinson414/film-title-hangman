@@ -8,10 +8,10 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    categories: null,
+    categories: [],
     selectedCat: "",
     guessedLetters: [],
-    filmTitle: ""
+    selectedFilm: ""
   };
 
   componentDidMount() {
@@ -26,11 +26,28 @@ class App extends Component {
     this.setState({ categories });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.selectedCat !== this.state.selectedCat) {
+      this.filmSelect();
+    }
+  }
+
   catSelect = event => {
     const { value } = event.target;
     this.setState({
       selectedCat: value
-    }).then();
+    });
+  };
+
+  filmSelect = () => {
+    let filteredFilms = films.filter(film => {
+      return film.category === this.state.selectedCat;
+    });
+    filteredFilms &&
+      this.setState({
+        selectedFilm:
+          filteredFilms[Math.floor(Math.random() * filteredFilms.length)].title
+      });
   };
 
   letterSelect = letter => {
@@ -40,14 +57,14 @@ class App extends Component {
   };
 
   render() {
-    const { categories, selectedCat, guessedLetters } = this.state;
+    const { categories, selectedFilm, guessedLetters } = this.state;
 
     return (
       <div className="App">
         <h1>Film Title Hangman</h1>
         <Category categories={categories} onSelect={this.catSelect} />
         <Image />
-        <Word selectedCat={selectedCat} guessedLetters={guessedLetters} />
+        <Word selectedFilm={selectedFilm} guessedLetters={guessedLetters} />
         <Letters letterSelect={this.letterSelect} />
       </div>
     );

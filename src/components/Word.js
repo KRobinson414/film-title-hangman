@@ -1,17 +1,31 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import "../data/films";
 
 export default class Word extends Component {
   state = {};
 
   render() {
-    const { selectedCat, guessedLetters } = this.props;
-    return <div className="word">Word</div>;
+    const { selectedFilm, guessedLetters } = this.props;
+    const selectedFilmArr = selectedFilm.split("");
+    console.log(selectedFilmArr);
+    return (
+      <div className="word">
+        {selectedFilm &&
+          selectedFilmArr.map((letter, index) =>
+            guessedLetters.includes(letter) ? (
+              <span key={index} className="word-char">
+                {letter}
+              </span>
+            ) : (
+              <span key={index}>_</span>
+            )
+          )}
+      </div>
+    );
   }
 }
 
 Word.propTypes = {
-  selectedCat: PropTypes.string.isRequired,
+  selectedFilm: PropTypes.string.isRequired,
   guessedLetters: PropTypes.array.isRequired
 };
