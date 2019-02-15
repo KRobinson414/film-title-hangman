@@ -45,6 +45,7 @@ class Letters extends Component {
       "z"
     ];
     const { clickedLetters } = this.state;
+    const { resetGame } = this.props;
 
     return (
       <div className="letters">
@@ -58,13 +59,19 @@ class Letters extends Component {
             {letter.toUpperCase()}
           </button>
         ))}
+        <p>
+          <button id="reset" onClick={resetGame}>
+            Reset
+          </button>
+        </p>
       </div>
     );
   }
 }
 
 Letters.propTypes = {
-  letterSelect: PropTypes.func.isRequired
+  letterSelect: PropTypes.func.isRequired,
+  resetGame: PropTypes.func.isRequired
 };
 
 export default Letters;

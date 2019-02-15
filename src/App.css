@@ -1,49 +1,120 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono");
+@import url("https://fonts.googleapis.com/css?family=Gloria+Hallelujah");
+
 .App {
   text-align: center;
   display: grid;
   margin: 0px;
+  padding: 0px;
   width: 100vw;
-  height: 95vh;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 5em 6.5em 1fr 5em;
+  height: 100vh;
+  grid-template-columns: 50vw 50vw;
+  grid-template-rows: 5em 6.5em 1fr;
   grid-template-areas: "title title" "category category" "image letters";
+  background-color: #a9b3ce;
+  font-family: "Roboto Mono", sans-serif;
+  color: #474954;
+  font-size: 20px;
 }
 
 .App h1 {
   grid-area: title;
+  color: #474954;
+  font-family: "Roboto Mono", sans-serif;
+  font-size: 3em;
+  margin: 10px 0 0 0;
+}
+
+button {
+  background-color: #474954;
+  margin: 5px;
+  font-size: 20px;
+  color: whitesmoke;
+  z-index: 100;
+  cursor: pointer;
+  border-radius: 5px 5px 5px 5px;
+  font-family: "Roboto Mono", sans-serif;
+}
+
+button:disabled {
+  background-color: #a9b3ce;
+  z-index: 1;
+}
+
+#reset {
+  grid-area: letters;
+  background-color: #474954;
+  margin: 5px;
+  font-size: 20px;
+  color: whitesmoke;
+  font-family: "Roboto Mono", sans-serif;
+  cursor: pointer;
+  justify-self: right;
+  align-self: bottom;
+  height: 2em;
+  width: 4em;
+}
+
+img {
+  grid-area: image;
+  opacity: 0.8;
+  width: 40em;
+  height: auto;
+  overflow: hidden;
+  margin: 10px -100px -50px -130px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+#instruction {
+  grid-area: category;
 }
 
 .category {
   grid-area: category;
 }
 
-.image {
-  grid-area: image;
-}
-
-img {
-  grid-area: image;
-  width: 40em;
-  height: auto;
-  overflow: hidden;
-  margin: 0 -100px -50px -100px;
-}
-
 .letters {
   grid-area: letters;
-  width: 70%;
+  width: 80%;
   height: 1em;
-  justify-self: center;
-  align-self: center;
+  margin: 9em 0 0 1em;
 }
 
 .word {
   grid-area: letters;
-  justify-self: center;
-  margin-top: 4em;
+  margin: 3em 2em 0 0;
+  font-family: "Gloria Hallelujah", sans-serif;
+  font-weight: 900;
 }
 
 .word-char {
   margin: 10px;
   font-size: 30px;
+}
+
+.game-over {
+  grid-area: letters;
+  z-index: 1;
+  align-self: top;
+  justify-self: center;
+  align-content: center;
+  justify-content: center;
+  width: 60%;
+  height: 30%;
+  border: 2px solid black;
+  border-radius: 10px 10px 10px 10px;
+  background-color: #474954;
+  animation: appear 1s linear;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(120deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
 }

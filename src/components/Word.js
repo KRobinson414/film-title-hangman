@@ -12,7 +12,7 @@ export default class Word extends Component {
       <div className="word">
         {selectedFilm &&
           selectedFilmArr.map((letter, index) =>
-            guessedLetters.includes(letter) ? (
+            guessedLetters.includes(letter) || letter === " " ? (
               <span key={index} className="word-char">
                 {letter}
               </span>

@@ -5,6 +5,7 @@ import Image from "./components/Image";
 import Word from "./components/Word";
 import Letters from "./components/Letters";
 import "./App.css";
+import GameOver from "./components/GameOver";
 
 class App extends Component {
   state = {
@@ -12,7 +13,8 @@ class App extends Component {
     selectedCat: "",
     selectedFilm: "",
     guessedLetters: [],
-    wrongGuesses: []
+    wrongGuesses: [],
+    showGameOver: false
   };
 
   componentDidMount() {
@@ -52,12 +54,16 @@ class App extends Component {
   };
 
   letterSelect = letter => {
-    const { selectedFilm } = this.state;
+    const { selectedFilm, wrongGuesses } = this.state;
+    const gameOver = this.gameOver;
     if (!selectedFilm.includes(letter)) {
       this.setState(prevState => ({
         guessedLetters: [...prevState.guessedLetters, letter],
         wrongGuesses: [...prevState.wrongGuesses, letter]
       }));
+      if (wrongGuesses.length === 9) {
+        gameOver();
+      }
     } else {
       this.setState(prevState => ({
         guessedLetters: [...prevState.guessedLetters, letter]
@@ -65,21 +71,48 @@ class App extends Component {
     }
   };
 
+  gameOver = () => {
+    this.setState({
+      showGameOver: true
+    });
+  };
+
+  resetGame = () => {
+    this.setState({
+      selectedCat: "",
+      selectedFilm: "",
+      guessedLetters: [],
+      wrongGuesses: [],
+      showGameOver: false
+    });
+  };
+
   render() {
     const {
       categories,
       selectedFilm,
       guessedLetters,
-      wrongGuesses
+      wrongGuesses,
+      showGameOver
     } = this.state;
 
     return (
       <div className="App">
         <h1>Film Title Hangman</h1>
-        <Category categories={categories} onSelect={this.catSelect} />
-        <Image wrongGuesses={wrongGuesses} />
+        <Category
+          categories={categories}
+          onSelect={this.catSelect}
+          selectedFilm={selectedFilm}
+        />
+        {selectedFilm && <Image wrongGuesses={wrongGuesses} />}
+        {selectedFilm && (
+          <Letters
+            letterSelect={this.letterSelect}
+            resetGame={this.resetGame}
+          />
+        )}
         <Word selectedFilm={selectedFilm} guessedLetters={guessedLetters} />
-        <Letters letterSelect={this.letterSelect} />
+        {showGameOver && <GameOver resetGame={this.resetGame} />}
       </div>
     );
   }

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const Category = props => {
-  const { categories, onSelect } = props;
+  const { categories, onSelect, selectedFilm } = props;
 
   return (
     <div className="category">
@@ -17,14 +17,15 @@ const Category = props => {
           ))}
         </select>
       </p>
-      <p>Now guess the film!</p>
+      {selectedFilm && "Now guess the film!"}
     </div>
   );
 };
 
 Category.propTypes = {
   categories: PropTypes.array.isRequired,
-  onSelect: PropTypes.func.isRequired
+  onSelect: PropTypes.func.isRequired,
+  selectedFilm: PropTypes.string.isRequired
 };
 
 export default Category;
